@@ -9,6 +9,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="lib" path="lib/mockito-core-1.10.19.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/常用jar包/junit-4.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
