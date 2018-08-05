@@ -3,7 +3,7 @@ package java8.collector;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import java8.stream.Artist;
+import java8.model.Artist;
 
 /**
  *  基于java8的字符串拼接常用案例
@@ -89,13 +89,15 @@ public class StringExamples {
 	//使用reduce操作，将工作代理给StringCombiner对象
 	public static String formatArtistsRefactor4(List<Artist> artists) {
 		String result = artists.stream().map(Artist::getName)
-				.reduce(new StringCombiner(", ", "[", "]"), StringCombiner::add, StringCombiner::merge).toString();
+				.reduce(new StringCombiner(", ", "[", "]"), 
+						StringCombiner::add, StringCombiner::merge).toString();
 		return result;
 	}
 	
 	//使用定制的收集器收集字符串
 	public static String formatArtistsRefactor5(List<Artist> artists) {
-		String result = artists.stream().map(Artist::getName).collect(new StringCollector(", ", "[", "]"));
+		String result = artists.stream().map(Artist::getName)
+				.collect(new StringCollector(", ", "[", "]"));
 		return result;
 	}
 	
@@ -103,7 +105,8 @@ public class StringExamples {
 	public static String formatArtistsReducing(List<Artist> artists) {
 		String result = artists.stream().map(Artist::getName)
 				.collect(Collectors.reducing(new StringCombiner(", ", "[", "]"),
-						name -> new StringCombiner(", ", "[", "]").add(name), StringCombiner::merge))
+						name -> new StringCombiner(", ", "[", "]").add(name), 
+						StringCombiner::merge))
 				.toString();
 		return result;
 	}

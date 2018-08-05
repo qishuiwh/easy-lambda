@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 /**
- * ？？？
+ * 自定义收集器
  * @author : lihuan
  * @date 创建时间：2018年8月4日 下午9:50:22
  * @version 1.0

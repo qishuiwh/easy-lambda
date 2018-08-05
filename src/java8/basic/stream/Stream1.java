@@ -9,9 +9,9 @@ import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import java8.stream.Album;
-import java8.stream.Artist;
-import java8.stream.Song;
+import java8.model.Album;
+import java8.model.Artist;
+import java8.model.Song;
 
 
 /** 
@@ -33,12 +33,14 @@ public class Stream1 {
 		List<String> list = new LinkedList<>();
 		list.add("test1");
 		list.add("right");
-		long result = list.stream().filter(str -> str.equals("right")).count();
+		long result = list.stream()
+				.filter(str -> str.equals("right"))
+				.count();
 //		list.stream().filter(str -> {
 //			System.out.println(str);
 //			return str.equals("right");
 //		}).count();
-		System.out.println(" 1========>"+result);
+		System.out.println("filter: "+result);
 		return result;
 	}
 	
@@ -49,8 +51,9 @@ public class Stream1 {
 	 * @throws 
 	 */
 	public static List<Object> streamCollectList(){
-		List<Object> result = Stream.of("a","b","c").collect(Collectors.toList());
-		System.out.println(" 2========>"+result.size());
+		List<Object> result = Stream.of("a","b","c")
+				.collect(Collectors.toList());
+		System.out.println("collect: "+result.size());
 		return result;
 	}
 		
@@ -64,7 +67,7 @@ public class Stream1 {
 		List<String> result = Stream.of("a","b","C")
 				.map(str -> str.toUpperCase())
 				.collect(Collectors.toList());
-		System.out.println(result.get(0)+result.get(1)+result.get(2));
+		System.out.println("map: "+result.get(0)+result.get(1)+result.get(2));
 	}
 	
 	
@@ -78,7 +81,7 @@ public class Stream1 {
 		List<String> result = Stream.of("1abc","abcd","2bcd")
 				.filter(str -> Character.isDigit(str.charAt(0)))
 				.collect(Collectors.toList());
-		System.out.println(result.size());
+		System.out.println("filter: "+result.size());
 	}
 	
 	/**
@@ -90,9 +93,9 @@ public class Stream1 {
 	public static void streamFlatMap() {
 		List<String> result = Stream.of(Arrays.asList("r1","r2","r3")
 				,Arrays.asList("t1","t2","t3"))
-				.flatMap(strs -> strs.stream())
+				.flatMap(list -> list.stream())
 				.collect(Collectors.toList());
-		System.out.println(result.size());
+		System.out.println("flatMap: "+result.size());
 	}
 	
 	/**
@@ -106,7 +109,7 @@ public class Stream1 {
 		Song result = list.stream()
 				.max(Comparator.comparing(track -> track.getLength()))
 				.get();
-		System.out.println(result.getName());
+		System.out.println("min/max: "+result.getName());
 	}
 	
 	/**
@@ -123,6 +126,9 @@ public class Stream1 {
 		int count2 = accumulator.apply(
 				accumulator.apply(accumulator.apply(0, 1), 2), 3);
 		System.out.println("reduce2: " + count2);
+		int count3 = Stream.of(1,2,3)
+				.reduce(Integer::sum).get();
+		System.out.println("reduce3:" + count3);
 	}
 	
 	/**
@@ -138,15 +144,32 @@ public class Stream1 {
 				.filter(artist -> artist.getName().startsWith("The"))
 				.map(artist -> artist.getNationality())
 				.collect(Collectors.toSet());
-		System.out.println(origins.size());
+		System.out.println("streamZH: "+origins.size());
 	}
+	
 	public static void streamZH2(List<Album> albums) {
+		
 		albums.stream()
 		.flatMap(album -> album.getTracks())
 		.filter(track -> track.getLength() > 60)
 		.map(track -> track.getName())
 		.collect(Collectors.toSet());
 		
+	}
+	
+	/**
+	 * 请输入功能描述：按一定规则拼接集合字符串
+	 * @param params 
+	 * @return 
+	 * @throws 
+	 */
+	public static void streamJoin() {
+		String result = Arrays.asList("str1","str2","str3")
+		.stream()
+		.filter(str -> str.contains("3"))
+		.map(str -> str.toUpperCase())
+		.collect(Collectors.joining(",","[","]"));
+		System.out.println("join: "+result);
 	}
 	
 	public static void main(String[] args) {
@@ -159,6 +182,7 @@ public class Stream1 {
 		streamMin();
 		streamReduce();
 		streamZH();
+		streamJoin();
 	}
 	
 }

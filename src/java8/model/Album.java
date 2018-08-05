@@ -1,4 +1,4 @@
-package java8.stream;
+package java8.model;
 
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;

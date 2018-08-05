@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import java8.stream.Artist;
+import java8.model.Artist;
 
 /** 
 * @author : lihuan

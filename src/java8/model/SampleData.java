@@ -1,4 +1,4 @@
-package java8.stream;
+package java8.model;
 
 import java.util.Arrays;
 import java.util.List;

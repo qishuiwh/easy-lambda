@@ -8,8 +8,8 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import java8.stream.Album;
-import java8.stream.Artist;
+import java8.model.Album;
+import java8.model.Artist;
 
 import static java.nio.charset.Charset.defaultCharset;
 import static java.util.Comparator.comparing;
@@ -49,7 +49,8 @@ public class CollectorExamples {
 	}
 	//使用简单方式求每个艺术家的专辑名
 	public Map<Artist, Integer> numberOfAlbumsDumb(Stream<Album> albums) {
-		Map<Artist, List<Album>> albumsByArtist = albums.collect(groupingBy(album -> album.getMainMusician()));
+		Map<Artist, List<Album>> albumsByArtist = albums
+				.collect(groupingBy(album -> album.getMainMusician()));
 
 		Map<Artist, Integer> numberOfAlbums = new HashMap<>();
 		for (Entry<Artist, List<Album>> entry : albumsByArtist.entrySet()) {
@@ -63,17 +64,20 @@ public class CollectorExamples {
 	}
 
 	public Map<Artist, List<String>> nameOfAlbumsDumb(Stream<Album> albums) {
-		Map<Artist, List<Album>> albumsByArtist = albums.collect(groupingBy(album -> album.getMainMusician()));
+		Map<Artist, List<Album>> albumsByArtist = albums
+				.collect(groupingBy(album -> album.getMainMusician()));
 
 		Map<Artist, List<String>> nameOfAlbums = new HashMap<>();
 		for (Entry<Artist, List<Album>> entry : albumsByArtist.entrySet()) {
-			nameOfAlbums.put(entry.getKey(), entry.getValue().stream().map(Album::getName).collect(toList()));
+			nameOfAlbums.put(entry.getKey(), entry.getValue().stream().map(Album::getName)
+					.collect(toList()));
 		}
 		return nameOfAlbums;
 	}
 	//使用收集器求每个艺术家的专辑名
 	public Map<Artist, List<String>> nameOfAlbums(Stream<Album> albums) {
-		return albums.collect(groupingBy(Album::getMainMusician, mapping(Album::getName, toList())));
+		return albums.collect(groupingBy(Album::getMainMusician, 
+				mapping(Album::getName, toList())));
 	}
 	
 	public static Map<String, Long> countWords(Stream<String> words) {
@@ -90,7 +94,8 @@ public class CollectorExamples {
 	}
 
 	public double averageNumberOfTracks(List<Album> albums) {
-		return albums.stream().collect(averagingInt(album -> album.getTrackList().size()));
+		return albums.stream()
+				.collect(averagingInt(album -> album.getTrackList().size()));
 	}
 
 }
