@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import java8.stream.Album;
 import java8.stream.Artist;
-import java8.stream.Track;
+import java8.stream.Song;
 
 
 /** 
@@ -102,8 +102,8 @@ public class Stream1 {
 	 * @throws 
 	 */
 	public static void streamMin() {
-		List<Track> list = Arrays.asList(new Track("t1",222),new Track("t2",333));
-		Track result = list.stream()
+		List<Song> list = Arrays.asList(new Song("t1",222),new Song("t2",333));
+		Song result = list.stream()
 				.max(Comparator.comparing(track -> track.getLength()))
 				.get();
 		System.out.println(result.getName());
@@ -132,7 +132,7 @@ public class Stream1 {
 	 * @throws 
 	 */
 	public static void streamZH() {
-		Album album = new Album("The",Arrays.asList(new Track("test",1)),
+		Album album = new Album("The",Arrays.asList(new Song("test",1)),
 				Arrays.asList(new Artist("at","at2")));
 		Set<String> origins = album.getMusicians()
 				.filter(artist -> artist.getName().startsWith("The"))

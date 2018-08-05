@@ -8,18 +8,25 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+/**
+ *  唱片集,歌曲，歌手或乐队
+ *  @author : lihuan
+ *  @date 创建时间：2018年8月5日 下午1:00:11 
+ *  @version 1.0
+ */
 public class Album {
+	
 	private String name;
-	private List<Track> tracks;
+	private List<Song> songs;
 	private List<Artist> musicians;
 
-	public Album(String name, List<Track> tracks, List<Artist> musicians) {
+	public Album(String name, List<Song> tracks, List<Artist> musicians) {
 		Objects.requireNonNull(name);
 		Objects.requireNonNull(tracks);
 		Objects.requireNonNull(musicians);
 
 		this.name = name;
-		this.tracks = new ArrayList<>(tracks);
+		this.songs = new ArrayList<>(tracks);
 		this.musicians = new ArrayList<>(musicians);
 	}
 
@@ -27,12 +34,12 @@ public class Album {
 		return name;
 	}
 
-	public Stream<Track> getTracks() {
-		return tracks.stream();
+	public Stream<Song> getTracks() {
+		return songs.stream();
 	}
 
-	public List<Track> getTrackList() {
-		return unmodifiableList(tracks);
+	public List<Song> getTrackList() {
+		return unmodifiableList(songs);
 	}
 
 	public Stream<Artist> getMusicians() {
@@ -48,9 +55,9 @@ public class Album {
 	}
 
 	public Album copy() {
-		List<Track> tracks = getTracks().map(Track::copy).collect(toList());
+		List<Song> tracks = getTracks().map(Song::copy).collect(toList());
 		List<Artist> musicians = getMusicians().map(Artist::copy).collect(toList());
 		return new Album(name, tracks, musicians);
-	} 
+	}
 
 }

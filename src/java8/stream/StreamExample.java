@@ -19,11 +19,19 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
+/**
+ *  @author : lihuan
+ *  @date 创建时间：2018年8月5日 下午1:12:21 
+ *  @version 1.0
+ */
 public class StreamExample {
-	static List<Artist> allArtists = new ArrayList<>();
+	
+	private static List<Artist> allArtists = new ArrayList<>();
 
 	public static void main(String[] args) {
-		Artist a = new Artist("One", "London"), b = new Artist("Two", "Peking"), c = new Artist("Three", "Tokyo"),
+		Artist  a = new Artist("One", "London"), 
+				b = new Artist("Two", "Peking"), 
+				c = new Artist("Three", "Tokyo"),
 				d = new Artist("Four", "London");
 		allArtists.add(a);
 		allArtists.add(b);
@@ -71,8 +79,8 @@ public class StreamExample {
 			list.add(uppercaseString);
 		}
 		// 使用map操作将字符串转换为大写
-		list = Stream.of("a", "b", "hello").map(string -> string.toUpperCase())
-				// 接受String类型的参数，返回一个新的String。
+		list = Stream.of("a", "b", "hello")
+				.map(string -> string.toUpperCase())
 				.collect(Collectors.toList());
 
 		assertEquals(Arrays.asList("A", "B", "HELLO"), list);
@@ -89,7 +97,8 @@ public class StreamExample {
 			}
 		}
 		// 函数式风格的
-		beginningWithNumbers = Stream.of("a", "1abc", "abc1").filter(value -> isDigit(value.charAt(0)))
+		beginningWithNumbers = Stream.of("a", "1abc", "abc1")
+				.filter(value -> isDigit(value.charAt(0)))
 				.collect(toList());
 		System.out.println(beginningWithNumbers.get(0));
 	}
@@ -97,7 +106,8 @@ public class StreamExample {
 	// 4.flatMap
 	@Test
 	public void flatMap() {
-		List<Integer> together = Stream.of(asList(1, 2), asList(3, 4)).flatMap(numbers -> numbers.stream())// 和map'方法一样是Function接口，返回值是Stream类型
+		List<Integer> together = Stream.of(asList(1, 2), asList(3, 4))
+				.flatMap(numbers -> numbers.stream())// 和map'方法一样是Function接口，返回值是Stream类型
 				.collect(toList());
 		assertEquals(asList(1, 2, 3, 4), together);
 	}
@@ -105,9 +115,12 @@ public class StreamExample {
 	// 5. max和min
 	@Test
 	public void maxin() {
-		List<Track> tracks = asList(new Track("bakai", 524), new Track("Violets for your furs", 378),
-				new Track("Time Was", 451));
-		Track shortestTrack = tracks.stream().max(Comparator.comparing(track -> track.getLength()))// comparing是java8新提供的静态方法,接受一个函数，返回另一个函数。
+		List<Song> tracks = asList(
+				new Song("bakai", 524), 
+				new Song("Violets for your furs", 378),
+				new Song("Time Was", 451));
+		Song shortestTrack = tracks.stream()
+				.max(Comparator.comparing(track -> track.getLength()))// comparing是java8新提供的静态方法,接受一个函数，返回另一个函数。
 				.get();// 通过get方法可以取出Optional对象的值
 		assertEquals(tracks.get(1), shortestTrack);
 	}
@@ -132,7 +145,7 @@ public class StreamExample {
 		// 待重构的代码
 		Set<String> trackNames = new HashSet<>();
 		for (Album album : albums) {
-			for (Track track : album.getTrackList()) {
+			for (Song track : album.getTrackList()) {
 				if (track.getLength() > 60) {
 					String name = track.getName();
 					trackNames.add(name);
@@ -140,7 +153,9 @@ public class StreamExample {
 			}
 		}
 		// return trackNames;流风格的代码
-		return albums.stream().flatMap(album -> album.getTracks()).filter(track -> track.getLength() > 60)
+		return albums.stream()
+				.flatMap(album -> album.getTracks())
+				.filter(track -> track.getLength() > 60)
 				.map(track -> track.getName())//
 				.collect(toSet());
 	}

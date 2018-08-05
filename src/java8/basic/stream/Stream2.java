@@ -1,6 +1,9 @@
 package java8.basic.stream;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,4 +35,9 @@ public class Stream2 {
 	public static void main(String[] args) {
 		streamJoin();
 	}
+	
+	ThreadLocal<DateFormat> localFormatter = ThreadLocal.withInitial(() -> new SimpleDateFormat());// 高阶函数withInitial
+	AtomicInteger threadId = new AtomicInteger();
+	ThreadLocal<Integer> localId = ThreadLocal.withInitial(() -> threadId.getAndIncrement());
+
 }

@@ -1,10 +1,17 @@
 package java8.stream;
 
-public class Track {
+/**
+ *  
+ *  @author : lihuan
+ *  @date 创建时间：2018年8月5日 下午1:01:01 
+ *  @version 1.0
+ */
+public class Song {
+	
 	private final String name;
 	private final int length;
 
-	public Track(String name, int length) {
+	public Song(String name, int length) {
 		this.name = name;
 		this.length = length;
 	}
@@ -17,7 +24,7 @@ public class Track {
 		return length;
 	}
 
-	public Track copy() {
-		return new Track(name, length);
+	public Song copy() {
+		return new Song(name, length);
 	}
 }

@@ -7,8 +7,14 @@ import java.util.Objects;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
+/**
+ *  艺术家或者乐队
+ *  @author : lihuan
+ *  @date 创建时间：2018年8月5日 下午1:00:18 
+ *  @version 1.0
+ */
 public class Artist {
-	
+
 	private String name;
 	private List<Artist> members;
 	private String nationality;
