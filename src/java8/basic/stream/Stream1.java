@@ -15,8 +15,8 @@ import java8.model.Song;
 
 
 /** 
- * Stream类中的方法对应集合中的一种操作，总结一些常用的stream流操作
-* @author : lihuan
+ * Stream类中的方法对应常见的集合操作，总结一些常用的stream操作样例代码
+* @author : lh
 * @date 创建时间：2018年8月5日 上午8:49:02 
 * @version 1.0  
 */
