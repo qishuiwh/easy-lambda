@@ -18,8 +18,8 @@ public class Styles {
 		Runnable noparams = () -> System.out.println("lambda no params style!");
 		noparams.run();
 		//一参，单行
-		TestInterface onparams = test -> System.out.println(test);
-		onparams.test("a param a line");
+//		TestInterface onparams = test -> System.out.println(test);
+////		onparams.test("a param a line");
 		
 		//无参 多行
 		Runnable runbody = () -> {
@@ -28,11 +28,11 @@ public class Styles {
 		};
 		runbody.run();
 		//多参 多行
-		TestInterface2 t2 = (str1, str2) -> {
-			System.out.println(str1);
-			System.out.println(str2);
-		};
-		t2.test2("param1", "param2");
+//		TestInterface2 t2 = (str1, str2) -> {
+//			System.out.println(str1);
+//			System.out.println(str2);
+//		};
+//		t2.test2("param1", "param2");
 		
 		//返回 函数体 
 		BinaryOperator<Long> add = (x,y) -> x + y;
